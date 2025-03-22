@@ -18,5 +18,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.include_router(router=router_v1, prefix=settings.api_v1_prefix, tags=["Products"])
 
+
+@app.get("/")
+def read_root():
+    return {"Hello": "My World"}
+
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=0000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
